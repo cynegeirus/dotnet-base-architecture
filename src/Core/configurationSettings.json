@@ -1,0 +1,13 @@
+﻿{
+  "Mail": {
+    "Server": "smtp.gmail.com",
+    "Port": 587,
+    "Sender": "test@gmail.com",
+    "Username": "test@gmail.com",
+    "Password": "1234567890",
+    "EnableSsl": false
+  },
+  "Database": {
+    "PGSQL": "User ID=postgres;Password=postgres;Server=127.0.0.1;Port=5432;Database=postgres;Pooling=true;"
+  }
+}
