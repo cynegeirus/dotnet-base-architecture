@@ -11,35 +11,20 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DataAccess.Migrations
 {
-    [DbContext(typeof(ExpeditionManagementContext))]
-    [Migration("20240806123231_ChangeExpeditionTable")]
-    partial class ChangeExpeditionTable
+    [DbContext(typeof(BackendDbContext))]
+    [Migration("20250424142522_InitialDatabase")]
+    partial class InitialDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("ExpeditionExpeditionStation", b =>
-                {
-                    b.Property<Guid>("ExpeditionId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ExpeditionStationsId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("ExpeditionId", "ExpeditionStationsId");
-
-                    b.HasIndex("ExpeditionStationsId");
-
-                    b.ToTable("ExpeditionExpeditionStation", "expedition");
-                });
 
             modelBuilder.Entity("Core.Entities.Concrete.Management.Menu", b =>
                 {
@@ -59,9 +44,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 619, DateTimeKind.Local).AddTicks(9695))
                         .HasColumnName("CreatedDate")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(1)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("CreatedUserId")
                         .HasColumnType("uuid")
@@ -71,9 +56,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("DeletedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(285))
                         .HasColumnName("DeletedDate")
-                        .HasColumnOrder(7);
+                        .HasColumnOrder(7)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("DeletedUserId")
                         .HasColumnType("uuid")
@@ -106,9 +91,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 619, DateTimeKind.Local).AddTicks(9904))
                         .HasColumnName("UpdatedDate")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(4)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("UpdatedUserId")
                         .HasColumnType("uuid")
@@ -132,9 +117,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(504))
                         .HasColumnName("CreatedDate")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(1)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("CreatedUserId")
                         .HasColumnType("uuid")
@@ -144,9 +129,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("DeletedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(855))
                         .HasColumnName("DeletedDate")
-                        .HasColumnOrder(7);
+                        .HasColumnOrder(7)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("DeletedUserId")
                         .HasColumnType("uuid")
@@ -176,9 +161,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(680))
                         .HasColumnName("UpdatedDate")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(4)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("UpdatedUserId")
                         .HasColumnType("uuid")
@@ -209,9 +194,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(980))
                         .HasColumnName("CreatedDate")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(1)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("CreatedUserId")
                         .HasColumnType("uuid")
@@ -221,9 +206,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("DeletedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(1240))
                         .HasColumnName("DeletedDate")
-                        .HasColumnOrder(7);
+                        .HasColumnOrder(7)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("DeletedUserId")
                         .HasColumnType("uuid")
@@ -250,9 +235,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(1113))
                         .HasColumnName("UpdatedDate")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(4)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("UpdatedUserId")
                         .HasColumnType("uuid")
@@ -276,9 +261,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(1347))
                         .HasColumnName("CreatedDate")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(1)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("CreatedUserId")
                         .HasColumnType("uuid")
@@ -288,9 +273,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("DeletedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(1595))
                         .HasColumnName("DeletedDate")
-                        .HasColumnOrder(7);
+                        .HasColumnOrder(7)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("DeletedUserId")
                         .HasColumnType("uuid")
@@ -317,9 +302,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(1468))
                         .HasColumnName("UpdatedDate")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(4)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("UpdatedUserId")
                         .HasColumnType("uuid")
@@ -343,9 +328,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(1711))
                         .HasColumnName("CreatedDate")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(1)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("CreatedUserId")
                         .HasColumnType("uuid")
@@ -355,9 +340,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("DeletedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(1974))
                         .HasColumnName("DeletedDate")
-                        .HasColumnOrder(7);
+                        .HasColumnOrder(7)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("DeletedUserId")
                         .HasColumnType("uuid")
@@ -384,9 +369,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(1841))
                         .HasColumnName("UpdatedDate")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(4)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("UpdatedUserId")
                         .HasColumnType("uuid")
@@ -413,9 +398,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(2079))
                         .HasColumnName("CreatedDate")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(1)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("CreatedUserId")
                         .HasColumnType("uuid")
@@ -425,9 +410,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("DeletedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(2335))
                         .HasColumnName("DeletedDate")
-                        .HasColumnOrder(7);
+                        .HasColumnOrder(7)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("DeletedUserId")
                         .HasColumnType("uuid")
@@ -466,9 +451,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(2203))
                         .HasColumnName("UpdatedDate")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(4)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("UpdatedUserId")
                         .HasColumnType("uuid")
@@ -495,9 +480,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(2439))
                         .HasColumnName("CreatedDate")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(1)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("CreatedUserId")
                         .HasColumnType("uuid")
@@ -507,9 +492,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("DeletedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(2756))
                         .HasColumnName("DeletedDate")
-                        .HasColumnOrder(7);
+                        .HasColumnOrder(7)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("DeletedUserId")
                         .HasColumnType("uuid")
@@ -536,9 +521,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(2597))
                         .HasColumnName("UpdatedDate")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(4)
+                        .HasDefaultValueSql("now()");
 
                     b.Property<Guid?>("UpdatedUserId")
                         .HasColumnType("uuid")
@@ -555,315 +540,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRole", "management");
-                });
-
-            modelBuilder.Entity("Entities.Concrete.Expedition", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id")
-                        .HasColumnOrder(0)
-                        .HasDefaultValueSql("uuid_generate_v4()");
-
-                    b.Property<long>("Code")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(2876))
-                        .HasColumnName("CreatedDate")
-                        .HasColumnOrder(1);
-
-                    b.Property<Guid?>("CreatedUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("CreatedUserId")
-                        .HasColumnOrder(2);
-
-                    b.Property<DateTime>("DeletedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(3123))
-                        .HasColumnName("DeletedDate")
-                        .HasColumnOrder(7);
-
-                    b.Property<Guid?>("DeletedUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("DeletedUserId")
-                        .HasColumnOrder(8);
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted")
-                        .HasColumnOrder(6);
-
-                    b.Property<bool>("IsUpdated")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsUpdated")
-                        .HasColumnOrder(3);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<TimeSpan>("TotalDuration")
-                        .HasColumnType("interval");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(2997))
-                        .HasColumnName("UpdatedDate")
-                        .HasColumnOrder(4);
-
-                    b.Property<Guid?>("UpdatedUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("UpdatedUserId")
-                        .HasColumnOrder(5);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Expedition", "expedition");
-                });
-
-            modelBuilder.Entity("Entities.Concrete.ExpeditionStation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id")
-                        .HasColumnOrder(0)
-                        .HasDefaultValueSql("uuid_generate_v4()");
-
-                    b.Property<DateTime>("ArrivalTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(3228))
-                        .HasColumnName("CreatedDate")
-                        .HasColumnOrder(1);
-
-                    b.Property<Guid?>("CreatedUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("CreatedUserId")
-                        .HasColumnOrder(2);
-
-                    b.Property<DateTime>("DeletedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(3486))
-                        .HasColumnName("DeletedDate")
-                        .HasColumnOrder(7);
-
-                    b.Property<Guid?>("DeletedUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("DeletedUserId")
-                        .HasColumnOrder(8);
-
-                    b.Property<Guid>("ExpeditionId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted")
-                        .HasColumnOrder(6);
-
-                    b.Property<bool>("IsUpdated")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsUpdated")
-                        .HasColumnOrder(3);
-
-                    b.Property<Guid>("StationId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(3364))
-                        .HasColumnName("UpdatedDate")
-                        .HasColumnOrder(4);
-
-                    b.Property<Guid?>("UpdatedUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("UpdatedUserId")
-                        .HasColumnOrder(5);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExpeditionStation", "expedition");
-                });
-
-            modelBuilder.Entity("Entities.Concrete.Station", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id")
-                        .HasColumnOrder(0)
-                        .HasDefaultValueSql("uuid_generate_v4()");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(3592))
-                        .HasColumnName("CreatedDate")
-                        .HasColumnOrder(1);
-
-                    b.Property<Guid?>("CreatedUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("CreatedUserId")
-                        .HasColumnOrder(2);
-
-                    b.Property<DateTime>("DeletedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(3879))
-                        .HasColumnName("DeletedDate")
-                        .HasColumnOrder(7);
-
-                    b.Property<Guid?>("DeletedUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("DeletedUserId")
-                        .HasColumnOrder(8);
-
-                    b.Property<Guid?>("ExpeditionStationId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted")
-                        .HasColumnOrder(6);
-
-                    b.Property<bool>("IsUpdated")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsUpdated")
-                        .HasColumnOrder(3);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(3735))
-                        .HasColumnName("UpdatedDate")
-                        .HasColumnOrder(4);
-
-                    b.Property<Guid?>("UpdatedUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("UpdatedUserId")
-                        .HasColumnOrder(5);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExpeditionStationId");
-
-                    b.ToTable("Station", "expedition");
-                });
-
-            modelBuilder.Entity("Entities.Concrete.Train", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id")
-                        .HasColumnOrder(0)
-                        .HasDefaultValueSql("uuid_generate_v4()");
-
-                    b.Property<long>("Code")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(3989))
-                        .HasColumnName("CreatedDate")
-                        .HasColumnOrder(1);
-
-                    b.Property<Guid?>("CreatedUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("CreatedUserId")
-                        .HasColumnOrder(2);
-
-                    b.Property<DateTime>("DeletedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(4239))
-                        .HasColumnName("DeletedDate")
-                        .HasColumnOrder(7);
-
-                    b.Property<Guid?>("DeletedUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("DeletedUserId")
-                        .HasColumnOrder(8);
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted")
-                        .HasColumnOrder(6);
-
-                    b.Property<bool>("IsReady")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsUpdated")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsUpdated")
-                        .HasColumnOrder(3);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 6, 15, 32, 31, 620, DateTimeKind.Local).AddTicks(4112))
-                        .HasColumnName("UpdatedDate")
-                        .HasColumnOrder(4);
-
-                    b.Property<Guid?>("UpdatedUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("UpdatedUserId")
-                        .HasColumnOrder(5);
-
-                    b.Property<string>("Url")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Train", "expedition");
-                });
-
-            modelBuilder.Entity("ExpeditionExpeditionStation", b =>
-                {
-                    b.HasOne("Entities.Concrete.Expedition", null)
-                        .WithMany()
-                        .HasForeignKey("ExpeditionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Concrete.ExpeditionStation", null)
-                        .WithMany()
-                        .HasForeignKey("ExpeditionStationsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.Management.MenuRole", b =>
@@ -898,18 +574,6 @@ namespace DataAccess.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Entities.Concrete.Station", b =>
-                {
-                    b.HasOne("Entities.Concrete.ExpeditionStation", null)
-                        .WithMany("Station")
-                        .HasForeignKey("ExpeditionStationId");
-                });
-
-            modelBuilder.Entity("Entities.Concrete.ExpeditionStation", b =>
-                {
-                    b.Navigation("Station");
                 });
 #pragma warning restore 612, 618
         }

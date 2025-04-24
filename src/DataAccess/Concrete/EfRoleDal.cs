@@ -5,4 +5,4 @@ using DataAccess.EntityFramework.Contexts;
 
 namespace DataAccess.Concrete;
 
-public class EfRoleDal : EfBaseRepository<Role, ExpeditionManagementContext>, IRoleDal;
+public class EfRoleDal : EfBaseRepository<Role, BackendDbContext>, IRoleDal;

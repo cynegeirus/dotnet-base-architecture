@@ -5,11 +5,11 @@ using DataAccess.EntityFramework.Contexts;
 
 namespace DataAccess.Concrete;
 
-public class EfUserDal : EfBaseRepository<User, ExpeditionManagementContext>, IUserDal
+public class EfUserDal : EfBaseRepository<User, BackendDbContext>, IUserDal
 {
     public List<Role> GetRoles(User user)
     {
-        using ExpeditionManagementContext context = new();
+        using BackendDbContext context = new();
         var result = context.Role!.Join(context.UserRole!,
             roles => roles.Id,
             userRoles => userRoles.RoleId, (roles, userRoles) => new

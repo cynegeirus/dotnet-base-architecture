@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace DataAccess.EntityFramework.Contexts;
 
-public class ExpeditionManagementContext : DbContext
+public class BackendDbContext : DbContext
 {
     public DbSet<Menu> Menu { get; set; }
     public DbSet<Role>? Role { get; set; }
@@ -28,7 +28,7 @@ public class ExpeditionManagementContext : DbContext
         optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
 
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-        optionsBuilder.UseNpgsql(ConfigurationHelper.GetConfigWithFile("configurationSettings.json").GetValue<string>("Databases:ExpeditionManagementDB"));
+        optionsBuilder.UseNpgsql(ConfigurationHelper.GetConfigWithFile("configurationSettings.json").GetValue<string>("Database:PGSQL"));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,11 +41,11 @@ public class ExpeditionManagementContext : DbContext
                 continue;
 
             modelBuilder.Entity(entityType.ClrType).Property(nameof(BaseEntity.Id)).HasDefaultValueSql("uuid_generate_v4()");
-            modelBuilder.Entity(entityType.ClrType).Property(nameof(BaseEntity.CreatedDate)).HasDefaultValue(DateTime.Now);
+            modelBuilder.Entity(entityType.ClrType).Property(nameof(BaseEntity.CreatedDate)).HasDefaultValueSql("now()");
             modelBuilder.Entity(entityType.ClrType).Property(nameof(BaseEntity.IsUpdated)).HasDefaultValue(false);
-            modelBuilder.Entity(entityType.ClrType).Property(nameof(BaseEntity.UpdatedDate)).HasDefaultValue(DateTime.Now);
+            modelBuilder.Entity(entityType.ClrType).Property(nameof(BaseEntity.UpdatedDate)).HasDefaultValueSql("now()");
             modelBuilder.Entity(entityType.ClrType).Property(nameof(BaseEntity.IsDeleted)).HasDefaultValue(false);
-            modelBuilder.Entity(entityType.ClrType).Property(nameof(BaseEntity.DeletedDate)).HasDefaultValue(DateTime.Now);
+            modelBuilder.Entity(entityType.ClrType).Property(nameof(BaseEntity.DeletedDate)).HasDefaultValueSql("now()");
         }
     }
 }

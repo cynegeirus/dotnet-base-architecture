@@ -5,4 +5,4 @@ using DataAccess.EntityFramework.Contexts;
 
 namespace DataAccess.Concrete;
 
-public class EfNotificationDal : EfBaseRepository<Notification, ExpeditionManagementContext>, INotificationDal;
+public class EfNotificationDal : EfBaseRepository<Notification, BackendDbContext>, INotificationDal;

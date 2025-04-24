@@ -5,4 +5,4 @@ using DataAccess.EntityFramework.Contexts;
 
 namespace DataAccess.Concrete;
 
-public class EfSystemParameterDal : EfBaseRepository<SystemParameter, ExpeditionManagementContext>, ISystemParameterDal;
+public class EfSystemParameterDal : EfBaseRepository<SystemParameter, BackendDbContext>, ISystemParameterDal;

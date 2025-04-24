@@ -5,4 +5,4 @@ using DataAccess.EntityFramework.Contexts;
 
 namespace DataAccess.Concrete;
 
-public class EfMenuDal : EfBaseRepository<Menu, ExpeditionManagementContext>, IMenuDal;
+public class EfMenuDal : EfBaseRepository<Menu, BackendDbContext>, IMenuDal;
