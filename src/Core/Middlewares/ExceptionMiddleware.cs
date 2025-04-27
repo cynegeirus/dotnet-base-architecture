@@ -35,7 +35,7 @@ public class ExceptionMiddleware(RequestDelegate next)
 
         return httpContext.Response.WriteAsync(JsonConvert.SerializeObject(new
         {
-            httpContext.Response.StatusCode,
+            Code = httpContext.Response.StatusCode,
             Message = "Internal Server Error"
         }, Formatting.Indented));
     }

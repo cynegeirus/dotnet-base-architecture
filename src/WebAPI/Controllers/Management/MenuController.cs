@@ -1,10 +1,12 @@
 using Business.Abstract;
 using Core.Entities.Concrete.Management;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers.Management;
 
 [ApiController]
+[Authorize(Roles = "Administrator")]
 [Route("api/Management/[controller]")]
 public class MenuController(IMenuService menuService) : ControllerBase
 {
