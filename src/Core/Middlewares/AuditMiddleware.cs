@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Core.Middlewares;
 
-public class TransactionMiddleware(RequestDelegate next)
+public class AuditMiddleware(RequestDelegate next)
 {
     public async Task InvokeAsync(HttpContext context)
     {

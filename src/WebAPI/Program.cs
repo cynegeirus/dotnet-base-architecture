@@ -1,4 +1,4 @@
-using Autofac;
+﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
 using Core.DependencyResolvers;
@@ -29,8 +29,19 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v2025.1",
-        Title = "Base Architecture",
-        Description = "Base Architecture is a modular and scalable architecture built using .NET technologies. It is designed to serve as a starting point for enterprise-level applications, providing a clean and layered project structure that follows modern software development best practices."
+        Title = "My Project",
+        Description = "This is a modular and scalable architecture built using .NET technologies. It is designed to serve as a starting point for enterprise-level applications, providing a clean and layered project structure that follows modern software development best practices.",
+        Contact = new OpenApiContact()
+        {
+            Name = "Akın BİÇER",
+            Email = "akin.bicer@outlook.com.tr",
+            Url = new Uri("https://akinbicer.com")
+        },
+        License = new OpenApiLicense()
+        {
+            Name = "MIT",
+            Url = new Uri("https://github.com/cynegeirus/dotnet-base-architecture/blob/master/LICENSE")
+        }
     });
     options.AddSecurityDefinition("token", new OpenApiSecurityScheme
     {
@@ -100,7 +111,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.UseExceptionMiddleware();
-app.UseTransactionMiddleware();
+app.UseAuditMiddleware();
 app.UseResponseCompression();
 app.UseResponseCaching();
 app.UseCors(corsPolicyBuilder => corsPolicyBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
@@ -108,7 +119,7 @@ app.UseSwagger();
 
 app.UseSwaggerUI(options =>
 {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Base Architecture v2025.1");
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "My Project v2025.1");
     options.RoutePrefix = string.Empty;
 });
 
