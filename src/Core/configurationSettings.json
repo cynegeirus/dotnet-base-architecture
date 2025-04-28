@@ -1,4 +1,7 @@
 ﻿{
+  "Cache": {
+    "Duration": 720
+  },
   "Mail": {
     "Server": "smtp.gmail.com",
     "Port": 587,

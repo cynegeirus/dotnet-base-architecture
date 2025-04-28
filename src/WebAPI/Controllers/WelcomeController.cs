@@ -1,3 +1,4 @@
+using Core.Utilities.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -11,10 +12,10 @@ public class WelcomeController : ControllerBase
     {
         var data = new
         {
-            DateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),
-            Machine = Environment.MachineName,
-            Domain = Environment.UserDomainName,
-            User = Environment.UserName
+            IpAddress = NetworkHelper.GetLocalIpAddress(),
+            Environment.MachineName,
+            DomainName = Environment.UserDomainName,
+            Environment.UserName
         };
 
         return Ok(data);

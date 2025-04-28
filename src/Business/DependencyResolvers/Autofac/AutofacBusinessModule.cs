@@ -34,6 +34,7 @@ public class AutofacBusinessModule : Module
         builder.RegisterType<SystemParameterManager>().As<ISystemParameterService>();
 
         builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+        builder.RegisterType<TimeService>().As<ITimeService>();
 
         var assembly = Assembly.GetExecutingAssembly();
         builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces().EnableInterfaceInterceptors(new ProxyGenerationOptions { Selector = new AspectInterceptorSelector() }).SingleInstance();

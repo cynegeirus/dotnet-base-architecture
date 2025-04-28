@@ -12,40 +12,40 @@ public class MenuRoleManager(IMenuRoleDal menuRoleDal) : IMenuRoleService
     {
         var data = menuRoleDal.Get(x => x != null && x.Id == id);
         return data != null
-            ? new SuccessDataResult<MenuRole>(data, Messages.TransactionSuccess)
-            : new ErrorDataResult<MenuRole>(Messages.RecordNotFound);
+            ? new SuccessDataResult<MenuRole>(data, CustomMessage.TransactionSuccess)
+            : new ErrorDataResult<MenuRole>(CustomMessage.RecordNotFound);
     }
 
     public IDataResult<List<MenuRole>> GetList()
     {
-        return new SuccessDataResult<List<MenuRole>>(menuRoleDal.GetList(), Messages.TransactionSuccess);
+        return new SuccessDataResult<List<MenuRole>>(menuRoleDal.GetList(), CustomMessage.TransactionSuccess);
     }
 
     public IResult Add(MenuRole entity)
     {
         var result = menuRoleDal.Add(entity);
-        return result ? new SuccessResult(Messages.RecordAdded) : new ErrorResult(Messages.TransactionError);
+        return result ? new SuccessResult(CustomMessage.RecordAdded) : new ErrorResult(CustomMessage.TransactionError);
     }
 
     public IResult Update(MenuRole entity)
     {
         var checkRecord = menuRoleDal.Get(x => x != null && x.Id == entity.Id);
         if (checkRecord == null)
-            return new ErrorResult(Messages.RecordNotFound);
+            return new ErrorResult(CustomMessage.RecordNotFound);
 
         var result = menuRoleDal.Update(entity);
 
-        return result ? new SuccessResult(Messages.RecordUpdated) : new ErrorResult(Messages.TransactionError);
+        return result ? new SuccessResult(CustomMessage.RecordUpdated) : new ErrorResult(CustomMessage.TransactionError);
     }
 
     public IResult Delete(MenuRole entity)
     {
         var checkRecord = menuRoleDal.Get(x => x != null && x.Id == entity.Id);
         if (checkRecord == null)
-            return new ErrorResult(Messages.RecordNotFound);
+            return new ErrorResult(CustomMessage.RecordNotFound);
 
         var result = menuRoleDal.Delete(checkRecord);
 
-        return result ? new SuccessResult(Messages.RecordDeleted) : new ErrorResult(Messages.TransactionError);
+        return result ? new SuccessResult(CustomMessage.RecordDeleted) : new ErrorResult(CustomMessage.TransactionError);
     }
 }

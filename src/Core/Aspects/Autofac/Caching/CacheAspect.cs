@@ -1,14 +1,17 @@
 ﻿using Castle.DynamicProxy;
 using Core.CrossCuttingConcerns.Caching;
+using Core.Utilities.Helpers;
 using Core.Utilities.Interceptors;
 using Core.Utilities.IoC;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Aspects.Autofac.Caching;
 
-public class CacheAspect(int duration = 60) : MethodInterception
+public class CacheAspect : MethodInterception
 {
     private readonly ICacheManager? _cacheManager = ServiceTool.ServiceProvider!.GetService<ICacheManager>();
+    private readonly int _duration = ConfigurationHelper.GetConfigWithFile("configurationSettings.json").GetValue<int>("Cache:Duration");
 
     public override void Intercept(IInvocation invocation)
     {
@@ -22,6 +25,6 @@ public class CacheAspect(int duration = 60) : MethodInterception
         }
 
         invocation.Proceed();
-        _cacheManager?.Add(key, invocation.ReturnValue, duration);
+        _cacheManager?.Add(key, invocation.ReturnValue, _duration);
     }
 }

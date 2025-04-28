@@ -1,6 +1,6 @@
 ﻿namespace Business.Constants;
 
-public class Messages
+public class CustomMessage
 {
     public static string? RecordAdded = "Kayıt başarılı bir şekilde sisteme eklenmiştir.";
     public static string? RecordDeleted = "Kayıt başarılı bir şekilde sistemden silinmiştir.";
@@ -25,4 +25,9 @@ public class Messages
     public static string? TransactionSuccess = "İşlem başarılı bir şekilde tamamlandı.";
     public static string? TransactionError = "İşlem gerçekleştirilirken bir hata meydana geldi.";
     public static string? RequiredField = "Lütfen gerekli alanları doldurunuz.";
+
+    public static string? CacheRemovedAll = "Tüm önbellek verileri başarıyla temizlendi.";
+    public static string? CacheNotFound = "Girilen bilgilere ait önbellek bulunamadı.";
+    public static string? CacheRemoved = "Girilen bilgilere ait önbellek başarılı bir şekilde temizlendi.";
+
 }

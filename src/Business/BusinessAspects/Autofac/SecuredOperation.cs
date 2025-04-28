@@ -17,6 +17,6 @@ public class SecuredOperation(string roles) : MethodInterception
     {
         var roleClaims = _httpContextAccessor?.HttpContext.User.ClaimRoles();
         if (_roles.Any(role => roleClaims!.Contains(role))) return;
-        throw new Exception(Messages.AuthorizationDenied);
+        throw new Exception(CustomMessage.AuthorizationDenied);
     }
 }

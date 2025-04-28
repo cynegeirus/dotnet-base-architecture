@@ -1,7 +1,7 @@
 ﻿using Core.Entities.Abstract;
 using Newtonsoft.Json;
 
-namespace Core.Entities.Concrete.Base;
+namespace Core.Dtos.Concrete;
 
 public class BaseDto : IDto
 {

@@ -1,4 +1,4 @@
-﻿using Core.Entities.Concrete.Base;
+﻿using Core.Dtos.Concrete;
 
 namespace Entities.Dtos.Responses;
 

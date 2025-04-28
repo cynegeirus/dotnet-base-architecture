@@ -38,7 +38,7 @@ public class AccountManager(IUserService userService, IRoleDal roleDal, IUserRol
             UserId = currentUser.Data!.Id
         });
 
-        return new SuccessDataResult<User?>(user, Messages.UserRegistered);
+        return new SuccessDataResult<User?>(user, CustomMessage.UserRegistered);
     }
 
     [ValidationAspect(typeof(LoginValidator), Priority = 1)]
@@ -46,14 +46,14 @@ public class AccountManager(IUserService userService, IRoleDal roleDal, IUserRol
     {
         var userToCheck = userService.GetUserByUsername(userForLoginDto?.Username);
         return !HashingHelper.VerifyPasswordHash(userForLoginDto?.Password, userToCheck.Data?.PasswordHash, userToCheck.Data?.PasswordSalt)
-            ? new ErrorDataResult<User?>(Messages.PasswordError)
-            : new SuccessDataResult<User?>(userToCheck.Data, Messages.SuccessfulLogin);
+            ? new ErrorDataResult<User?>(CustomMessage.PasswordError)
+            : new SuccessDataResult<User?>(userToCheck.Data, CustomMessage.SuccessfulLogin);
     }
 
     public IResult UserExists(string? username)
     {
         return userService.GetUserByUsername(username).Data != null
-            ? new ErrorResult(Messages.UserNameAlreadyExists)
+            ? new ErrorResult(CustomMessage.UserNameAlreadyExists)
             : new SuccessResult();
     }
 
@@ -62,6 +62,6 @@ public class AccountManager(IUserService userService, IRoleDal roleDal, IUserRol
         var claims = userService.GetRoles(user);
         var accessToken = tokenHelper.CreateToken(user, claims.Data);
 
-        return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
+        return new SuccessDataResult<AccessToken>(accessToken, CustomMessage.AccessTokenCreated);
     }
 }

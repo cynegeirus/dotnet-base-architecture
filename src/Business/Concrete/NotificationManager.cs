@@ -17,43 +17,43 @@ public class NotificationManager(INotificationDal notificationDal) : INotificati
                 Id = data.Id,
                 Title = data.Title,
                 Content = data.Content
-            }, Messages.TransactionSuccess)
-            : new ErrorDataResult<Notification>(Messages.RecordNotFound);
+            }, CustomMessage.TransactionSuccess)
+            : new ErrorDataResult<Notification>(CustomMessage.RecordNotFound);
     }
 
     public IDataResult<List<Notification>> GetList()
     {
-        return new SuccessDataResult<List<Notification>>(notificationDal.GetList(), Messages.TransactionSuccess);
+        return new SuccessDataResult<List<Notification>>(notificationDal.GetList(), CustomMessage.TransactionSuccess);
     }
 
     public IResult Add(Notification entity)
     {
         var result = notificationDal.Add(entity);
-        return result ? new SuccessResult(Messages.RecordAdded) : new ErrorResult(Messages.TransactionError);
+        return result ? new SuccessResult(CustomMessage.RecordAdded) : new ErrorResult(CustomMessage.TransactionError);
     }
 
     public IResult Update(Notification entity)
     {
         var checkRecord = notificationDal.Get(x => x != null && x.Id == entity.Id);
         if (checkRecord == null)
-            return new ErrorResult(Messages.RecordNotFound);
+            return new ErrorResult(CustomMessage.RecordNotFound);
 
         checkRecord.Title = entity.Title;
         checkRecord.Content = entity.Content;
 
         var result = notificationDal.Update(checkRecord);
 
-        return result ? new SuccessResult(Messages.RecordUpdated) : new ErrorResult(Messages.TransactionError);
+        return result ? new SuccessResult(CustomMessage.RecordUpdated) : new ErrorResult(CustomMessage.TransactionError);
     }
 
     public IResult Delete(Notification entity)
     {
         var checkRecord = notificationDal.Get(x => x != null && x.Id == entity.Id);
         if (checkRecord == null)
-            return new ErrorResult(Messages.RecordNotFound);
+            return new ErrorResult(CustomMessage.RecordNotFound);
 
         var result = notificationDal.Delete(checkRecord);
 
-        return result ? new SuccessResult(Messages.RecordDeleted) : new ErrorResult(Messages.TransactionError);
+        return result ? new SuccessResult(CustomMessage.RecordDeleted) : new ErrorResult(CustomMessage.TransactionError);
     }
 }

@@ -12,40 +12,40 @@ public class MenuManager(IMenuDal menuDal) : IMenuService
     {
         var data = menuDal.Get(x => x != null && x.Id == id);
         return data != null
-            ? new SuccessDataResult<Menu>(data, Messages.TransactionSuccess)
-            : new ErrorDataResult<Menu>(Messages.RecordNotFound);
+            ? new SuccessDataResult<Menu>(data, CustomMessage.TransactionSuccess)
+            : new ErrorDataResult<Menu>(CustomMessage.RecordNotFound);
     }
 
     public IDataResult<List<Menu>> GetList()
     {
-        return new SuccessDataResult<List<Menu>>(menuDal.GetList(), Messages.TransactionSuccess);
+        return new SuccessDataResult<List<Menu>>(menuDal.GetList(), CustomMessage.TransactionSuccess);
     }
 
     public IResult Add(Menu entity)
     {
         var result = menuDal.Add(entity);
-        return result ? new SuccessResult(Messages.RecordAdded) : new ErrorResult(Messages.TransactionError);
+        return result ? new SuccessResult(CustomMessage.RecordAdded) : new ErrorResult(CustomMessage.TransactionError);
     }
 
     public IResult Update(Menu entity)
     {
         var checkRecord = menuDal.Get(x => x != null && x.Id == entity.Id);
         if (checkRecord == null)
-            return new ErrorResult(Messages.RecordNotFound);
+            return new ErrorResult(CustomMessage.RecordNotFound);
 
         var result = menuDal.Update(entity);
 
-        return result ? new SuccessResult(Messages.RecordUpdated) : new ErrorResult(Messages.TransactionError);
+        return result ? new SuccessResult(CustomMessage.RecordUpdated) : new ErrorResult(CustomMessage.TransactionError);
     }
 
     public IResult Delete(Menu entity)
     {
         var checkRecord = menuDal.Get(x => x != null && x.Id == entity.Id);
         if (checkRecord == null)
-            return new ErrorResult(Messages.RecordNotFound);
+            return new ErrorResult(CustomMessage.RecordNotFound);
 
         var result = menuDal.Delete(checkRecord);
 
-        return result ? new SuccessResult(Messages.RecordDeleted) : new ErrorResult(Messages.TransactionError);
+        return result ? new SuccessResult(CustomMessage.RecordDeleted) : new ErrorResult(CustomMessage.TransactionError);
     }
 }
