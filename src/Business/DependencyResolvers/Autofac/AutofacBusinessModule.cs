@@ -1,13 +1,17 @@
 ﻿using System.Reflection;
 using Autofac;
 using Autofac.Extras.DynamicProxy;
-using Business.Abstract;
-using Business.Concrete;
+using Business.Abstract.Identity;
+using Business.Abstract.Management;
+using Business.Concrete.Identity;
+using Business.Concrete.Management;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Security.Jwt;
-using DataAccess.Abstract;
-using DataAccess.Concrete;
+using DataAccess.Abstract.Identity;
+using DataAccess.Abstract.Management;
+using DataAccess.Concrete.Identity;
+using DataAccess.Concrete.Management;
 using Module = Autofac.Module;
 
 namespace Business.DependencyResolvers.Autofac;

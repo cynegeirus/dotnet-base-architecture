@@ -1,4 +1,4 @@
-﻿using Core.Entities.Concrete.Management;
+﻿using Core.Entities.Concrete.Identity;
 
 namespace Core.Utilities.Security.Jwt;
 

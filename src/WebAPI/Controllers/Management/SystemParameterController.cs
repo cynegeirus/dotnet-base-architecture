@@ -1,4 +1,4 @@
-using Business.Abstract;
+using Business.Abstract.Management;
 using Core.Entities.Concrete.Management;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

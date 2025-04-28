@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Core.Entities.Abstract;
+using Core.Entities.Abstract.Base;
 
 namespace Core.Entities.Concrete.Base;
 

@@ -1,4 +1,4 @@
-﻿using Core.Dtos.Concrete;
+﻿using Core.Dtos.Concrete.Base;
 
 namespace Entities.Dtos.Requests;
 

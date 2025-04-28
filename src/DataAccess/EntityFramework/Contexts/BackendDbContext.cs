@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete.Base;
+using Core.Entities.Concrete.Identity;
 using Core.Entities.Concrete.Management;
 using Core.Utilities.Helpers;
 using Microsoft.EntityFrameworkCore;
