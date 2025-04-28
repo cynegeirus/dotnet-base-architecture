@@ -1,5 +1,7 @@
 ﻿using Business.Constants;
+using Core.Aspects.Autofac.Caching;
 using Core.CrossCuttingConcerns.Caching;
+using Core.Utilities.Helpers;
 using Core.Utilities.IoC;
 using Core.Utilities.Results;
 using Microsoft.AspNetCore.Mvc;
@@ -31,5 +33,16 @@ public class CacheController : ControllerBase
     {
         _cacheManager.RemoveAll();
         return Ok(new SuccessResult(CustomMessage.CacheRemovedAll));
+    }
+
+    [HttpGet("Test")]
+    [CacheActionFilter]
+    public IActionResult Test()
+    {
+        return Ok(new
+        {
+            Id = Guid.NewGuid(),
+            Logged = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        });
     }
 }
