@@ -17,7 +17,7 @@ public class FileLogHelper
 
     public static async void WriteLog(TransactionLog log)
     {
-        await WriteLogToFile(log, "transactions");
+        await WriteLogToFile(log, "audits");
     }
 
     private static async Task WriteLogToFile(object log, string logType)
