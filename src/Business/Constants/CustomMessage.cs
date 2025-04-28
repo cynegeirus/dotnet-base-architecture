@@ -29,5 +29,4 @@ public class CustomMessage
     public static string? CacheRemovedAll = "Tüm önbellek verileri başarıyla temizlendi.";
     public static string? CacheNotFound = "Girilen bilgilere ait önbellek bulunamadı.";
     public static string? CacheRemoved = "Girilen bilgilere ait önbellek başarılı bir şekilde temizlendi.";
-
 }

@@ -1,6 +1,5 @@
 ﻿using Business.Abstract.Management;
 using Business.Constants;
-using Core.Aspects.Autofac.Caching;
 using Core.Entities.Concrete.Management;
 using Core.Utilities.Results;
 using DataAccess.Abstract.Management;

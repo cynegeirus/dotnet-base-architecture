@@ -3,7 +3,6 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete.Identity;
-using Core.Entities.Concrete.Management;
 using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.Jwt;
