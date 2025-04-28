@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace Core.Entities.Concrete.Log;
+﻿namespace Core.Entities.Concrete.Log;
 
 public class ErrorLog
 {

@@ -3,15 +3,17 @@ using System.Text;
 
 namespace Core.Utilities.Security.Encryption;
 
-public static class StringCipher
+public static class SecurityHelper
 {
     private const int KeySize = 128;
     private const int DerivationIterations = 1000;
-    private const string Password = "$3sas!sB1lgiT3kn0l0jil3ri@";
+    private const string Password = "__TOP_SECRET_PASSWORD__";
+    private const string PrivateKey = "__TOP_SECRET_KEY__";
+
     private static readonly Random Random = new();
 
     [Obsolete("Obsolete")]
-    public static string Encrypt(string plainText)
+    public static string EncryptText(string plainText)
     {
         if (string.IsNullOrEmpty(plainText)) return string.Empty;
 
@@ -40,18 +42,18 @@ public static class StringCipher
 
         try
         {
-            Decrypt(res);
+            DecryptText(res);
         }
         catch
         {
-            return Encrypt(plainText);
+            return EncryptText(plainText);
         }
 
-        return res.IndexOf('+') > -1 ? Encrypt(plainText) : res;
+        return res.IndexOf('+') > -1 ? EncryptText(plainText) : res;
     }
 
     [Obsolete("Obsolete")]
-    public static string Decrypt(string cipherText)
+    public static string DecryptText(string cipherText)
     {
         var cipherTextBytesWithSaltAndIv = Convert.FromBase64String(cipherText);
         var saltStringBytes = cipherTextBytesWithSaltAndIv.Take(KeySize / 8).ToArray();
@@ -74,14 +76,74 @@ public static class StringCipher
         return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
     }
 
-    [Obsolete("Obsolete")]
-    private static byte[] Generate256BitsOfRandomEntropy()
+    public static void EncryptFile(string inputFile, string outputFile)
     {
-        var randomBytes = new byte[16];
-        using var rngCsp = new RNGCryptoServiceProvider();
-        rngCsp.GetBytes(randomBytes);
+        using var aesAlg = Aes.Create();
+        var keyBytes = Encoding.UTF8.GetBytes(PrivateKey);
+        aesAlg.Key = keyBytes;
+        aesAlg.GenerateIV();
 
-        return randomBytes;
+        using var outputStream = new FileStream(outputFile, FileMode.Create);
+        outputStream.Write(aesAlg.IV, 0, aesAlg.IV.Length);
+
+        using var cryptoStream = new CryptoStream(outputStream, aesAlg.CreateEncryptor(), CryptoStreamMode.Write);
+        using var inputStream = new FileStream(inputFile, FileMode.Open);
+        inputStream.CopyTo(cryptoStream);
+    }
+
+    public static void DecryptFile(string inputFile, string outputFile)
+    {
+        using var aesAlg = Aes.Create();
+        var keyBytes = Encoding.UTF8.GetBytes(PrivateKey);
+        aesAlg.Key = keyBytes;
+
+        using var inputStream = new FileStream(inputFile, FileMode.Open);
+        var iv = new byte[aesAlg.BlockSize / 8];
+        _ = inputStream.Read(iv, 0, iv.Length);
+
+        aesAlg.IV = iv;
+
+        using var cryptoStream = new CryptoStream(inputStream, aesAlg.CreateDecryptor(), CryptoStreamMode.Read);
+        using var outputStream = new FileStream(outputFile, FileMode.Create);
+        cryptoStream.CopyTo(outputStream);
+    }
+
+    public static byte[] EncryptBytes(byte[] inputBytes)
+    {
+        using var aesAlg = Aes.Create();
+        var keyBytes = Encoding.UTF8.GetBytes(PrivateKey);
+        aesAlg.Key = keyBytes;
+        aesAlg.GenerateIV();
+
+        using var memoryStream = new MemoryStream();
+
+        memoryStream.Write(aesAlg.IV, 0, aesAlg.IV.Length);
+
+        using var cryptoStream = new CryptoStream(memoryStream, aesAlg.CreateEncryptor(), CryptoStreamMode.Write);
+        cryptoStream.Write(inputBytes, 0, inputBytes.Length);
+        cryptoStream.FlushFinalBlock();
+
+        return memoryStream.ToArray();
+    }
+
+    public static byte[] DecryptBytes(byte[] inputBytes)
+    {
+        using var aesAlg = Aes.Create();
+        var keyBytes = Encoding.UTF8.GetBytes(PrivateKey);
+        aesAlg.Key = keyBytes;
+
+        using var memoryStream = new MemoryStream(inputBytes);
+
+        var iv = new byte[aesAlg.BlockSize / 8];
+        _ = memoryStream.Read(iv, 0, iv.Length);
+
+        aesAlg.IV = iv;
+
+        using var cryptoStream = new CryptoStream(memoryStream, aesAlg.CreateDecryptor(), CryptoStreamMode.Read);
+        using var decryptedStream = new MemoryStream();
+        cryptoStream.CopyTo(decryptedStream);
+
+        return decryptedStream.ToArray();
     }
 
     public static string Base64Encode(string plainText, int loop)
@@ -117,9 +179,27 @@ public static class StringCipher
         return decodeText;
     }
 
+    [Obsolete("Obsolete")]
+    private static byte[] Generate256BitsOfRandomEntropy()
+    {
+        var randomBytes = new byte[16];
+        using var rngCsp = new RNGCryptoServiceProvider();
+        rngCsp.GetBytes(randomBytes);
+
+        return randomBytes;
+    }
+
     public static string RandomString(int length)
     {
         const string chars = "AbCdEfGhIjKlMnOpQrStUvWxYz0123456789";
         return new string(Enumerable.Repeat(chars, length).Select(s => s[Random.Next(s.Length)]).ToArray());
+    }
+
+    public static string ComputeSha256Hash(byte[] fileBytes)
+    {
+        using var sha256 = SHA256.Create();
+        var hashBytes = sha256.ComputeHash(fileBytes);
+
+        return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.IO.Compression;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers.Autofac;
 using Core.DependencyResolvers;
@@ -11,7 +12,6 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
-using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -31,13 +31,13 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v2025.1",
         Title = "My Project",
         Description = "This is a modular and scalable architecture built using .NET technologies. It is designed to serve as a starting point for enterprise-level applications, providing a clean and layered project structure that follows modern software development best practices.",
-        Contact = new OpenApiContact()
+        Contact = new OpenApiContact
         {
             Name = "Akın BİÇER",
             Email = "akin.bicer@outlook.com.tr",
             Url = new Uri("https://akinbicer.com")
         },
-        License = new OpenApiLicense()
+        License = new OpenApiLicense
         {
             Name = "MIT",
             Url = new Uri("https://github.com/cynegeirus/dotnet-base-architecture/blob/master/LICENSE")
