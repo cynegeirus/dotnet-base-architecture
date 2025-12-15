@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Libraries/">
+    <Project Path="Libraries/Business/Business.csproj" Id="3e010163-a930-4974-9c41-583e7ed597e2" />
+    <Project Path="Libraries/Core/Core.csproj" Id="115cf7ea-7c0a-45de-8744-48a23befc205" />
+    <Project Path="Libraries/DataAccess/DataAccess.csproj" Id="747af2ea-8153-46a0-ab91-3f839778f36c" />
+    <Project Path="Libraries/Entities/Entities.csproj" Id="1d653cc0-7685-42bb-a58a-6de83cdd753e" />
+  </Folder>
+  <Folder Name="/Presentations/" />
+  <Folder Name="/Presentations/Services/">
+    <Project Path="Presentations/Services/WebAPI/WebAPI.csproj" Id="46af81a8-17b2-4a0a-95f5-7aecf647a572" />
+  </Folder>
+</Solution>

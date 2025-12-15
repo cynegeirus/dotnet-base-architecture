@@ -1,0 +1,32 @@
+{
+  "Mailing": {
+    "IpAddress": "smtp.gmail.com",
+    "PortNumber": 587,
+    "SenderTitle": "Test Mail Account",
+    "SenderMailAddress": "test@gmail.com",
+    "Username": "test@gmail.com",
+    "Password": "1234567890",
+    "EnableSsl": false
+  },
+  "Caching": {
+    "Duration": 720
+  },
+  "Logging": {
+    "Error": {
+      "WriteToDatabase": true,
+      "WriteToFile": true
+    },
+    "TrafficAudit": {
+      "WriteToDatabase": true,
+      "WriteToFile": true
+    },
+    "DatabaseAudit": {
+      "WriteToDatabase": true,
+      "WriteToFile": true
+    }
+  },
+  "Databasing": {
+    "PostgreSQL":
+      "Server=127.0.0.1;Port=5432;Database=BaseArchitecture;User Id=postgres;Password=Aa123456;Pooling=true;"
+  }
+}
