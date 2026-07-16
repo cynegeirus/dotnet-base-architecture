@@ -59,7 +59,7 @@ FROM base AS final
 LABEL maintainer="Ak?n B?ÇER <akin.bicer@outlook.com.tr>" \
       org.opencontainers.image.title="Base Architecture API" \
       org.opencontainers.image.description=".NET 10 N-Tier Architecture Template" \
-      org.opencontainers.image.vendor="Ak?n B?ÇER" \
+      org.opencontainers.image.vendor="Akýn BÝÇER" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.source="https://github.com/cynegeirus/dotnet-base-architecture"
 
